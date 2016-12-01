@@ -11,7 +11,7 @@ namespace OOBootCamp
             var parkingAreaOne = new ParkingArea("Parking Area One", 100);
             var parkingAreaTwo = new ParkingArea("Parking Area Two", 1000);
 
-            Assert.Equal("Parking Area One", ToolKit.WhichIsNear(parkingAreaOne,parkingAreaTwo));
+            Assert.Equal("Parking Area One", parkingAreaOne.WhichIsNear(parkingAreaTwo));
         }
 
         [Fact]
@@ -20,7 +20,7 @@ namespace OOBootCamp
             var parkingAreaOne = new ParkingArea("Parking Area One", 100);
             var parkingAreaTwo = new ParkingArea("Parking Area Two", 10);
 
-            Assert.Equal("Parking Area Two", ToolKit.WhichIsNear(parkingAreaOne, parkingAreaTwo));
+            Assert.Equal("Parking Area Two", parkingAreaOne.WhichIsNear(parkingAreaTwo));
         }
 
         [Fact]
@@ -29,7 +29,7 @@ namespace OOBootCamp
             var parkingAreaOne = new ParkingArea("Parking Area One", 100, "m");
             var parkingAreaTwo = new ParkingArea("Parking Area Two", 10, "Km");
 
-            Assert.Equal("Parking Area One", ToolKit.WhichIsNear(parkingAreaOne, parkingAreaTwo));
+            Assert.Equal("Parking Area One", parkingAreaOne.WhichIsNear(parkingAreaTwo));
         }
 
         [Fact]
@@ -38,41 +38,41 @@ namespace OOBootCamp
             var parkingAreaOne = new ParkingArea("Parking Area One", 100, "Km");
             var parkingAreaTwo = new ParkingArea("Parking Area Two", 10, "Km");
 
-            Assert.Equal("Parking Area Two", ToolKit.WhichIsNear(parkingAreaOne, parkingAreaTwo));
+            Assert.Equal("Parking Area Two", parkingAreaOne.WhichIsNear(parkingAreaTwo));
         }
 
     }
 
-    public class ToolKit {
-        public static string WhichIsNear(ParkingArea parkingAreaOne, ParkingArea parkingAreaTwo)
-        {
-            if (parkingAreaOne._unit == parkingAreaTwo._unit)
-            {
-                return parkingAreaOne._distance < parkingAreaTwo._distance ? parkingAreaOne._parkingAreaName : parkingAreaTwo._parkingAreaName;
-            }
-            if (parkingAreaOne._unit == "Km")
-            {
-                parkingAreaOne._distance *= 1000;
-            }
-            else
-            {
-                parkingAreaTwo._distance *= 1000;
-            }
-            return parkingAreaOne._distance < parkingAreaTwo._distance ? parkingAreaOne._parkingAreaName : parkingAreaTwo._parkingAreaName;
-        }
-    }
+    public class ToolKit {}
 
     public class ParkingArea
     {
         public string _unit { get; set; }
         public string _parkingAreaName { get; set; }
-        public int _distance { get; set; }
+        public double _distance { get; set; }
 
         public ParkingArea(string parkingAreaName, int distance, string unit = "m")
         {
             _parkingAreaName = parkingAreaName;
             _distance = distance;
             _unit = unit;
+        }
+
+        public string WhichIsNear(ParkingArea parkingAreaTwo)
+        {
+            if (_unit == parkingAreaTwo._unit)
+            {
+                return _distance < parkingAreaTwo._distance ? _parkingAreaName : parkingAreaTwo._parkingAreaName;
+            }
+            if (_unit == "Km")
+            {
+                _distance *= 1000;
+            }
+            else
+            {
+                parkingAreaTwo._distance *= 1000;
+            }
+            return _distance < parkingAreaTwo._distance ? _parkingAreaName : parkingAreaTwo._parkingAreaName;
         }
     }
 }
