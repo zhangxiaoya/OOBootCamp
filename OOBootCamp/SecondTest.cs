@@ -111,15 +111,30 @@ namespace OOBootCamp
 
             Assert.Equal((uint)3, parkingAreaA.remianParkingSpace());
         }
+
+        [Fact]
+        public void should_return_4_when_unpark_all_car()
+        {
+            var parkingAreaA = new ParkingAreaA();
+
+            parkingAreaA.Park(new Car());
+            parkingAreaA.Park(new Car());
+            parkingAreaA.Park(new Car());
+
+            parkingAreaA.UnAllPark();
+
+            Assert.Equal((uint)4, parkingAreaA.remianParkingSpace());
+        }
     }
 
     public class ParkingAreaA {
+        private const uint DefaultRemainedSpaceNumber = 4;
         private IList<Car> _allCar;
         private uint _remainPosition;
 
         public ParkingAreaA()
         {
-            _remainPosition = 4;
+            _remainPosition = DefaultRemainedSpaceNumber;
             _allCar = new List<Car>();
         }
 
@@ -153,6 +168,7 @@ namespace OOBootCamp
 
         public IList<Car> UnAllPark()
         {
+            _remainPosition = DefaultRemainedSpaceNumber;
             return _allCar;
         }
 
