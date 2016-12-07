@@ -6,48 +6,57 @@ using Xunit;
 
 namespace OOBootCamp
 {
-    public class SecondTest
+    public class ParkingLotTest
     {
         [Fact]
-        public void when_Jhon_parking_one_car_should_get_his_car()
+        public void should_park_and_pick_one_car()
         {
             var car = new Car();
-            var parkingAreaA = new ParkingAreaA();
+            var parkingLot = new ParkingLot();
 
-            Assert.Equal(car.GetHashCode(), parkingAreaA.Park(car));
-            Assert.Equal(car, parkingAreaA.UnPark(car.GetHashCode()));
+            var token = parkingLot.Park(car);
 
+            Assert.Same(car, parkingLot.Pick(token));
         }
 
         [Fact]
-        public void when_parking_two_cars_get_one_car_should_get_all_car()
+        public void should_pick_the_right_one_when_park_two_car()
         {
             var car1 = new Car();
             var car2 = new Car();
+            var parkingLot = new ParkingLot();
 
-            var parkingAreaA = new ParkingAreaA();
+            var token = parkingLot.Park(car1);
+            parkingLot.Park(car2);
 
-            Assert.Equal(car1.GetHashCode(),parkingAreaA.Park(car1));
-            Assert.Equal(car2.GetHashCode(),parkingAreaA.Park(car2));
-
-            var unAllPark = parkingAreaA.UnAllPark();
-
-            Assert.Equal(car1, unAllPark[0]);   
-            Assert.Equal(car2, unAllPark[1]);   
+            Assert.Same(car1, parkingLot.Pick(token));
         }
 
         [Fact]
-        public void when_parking_one_car_should_not_unpark_this_car_twice()
+        public void should_not_pick_one_car_twice()
         {
             var car = new Car();
+            var parkingLot = new ParkingLot();
 
-            var parkingAreaA = new ParkingAreaA();
+            var token = parkingLot.Park(car);
 
-            parkingAreaA.Park(car);
+            Assert.Same(car,parkingLot.Pick(token));
+            Assert.Null(parkingLot.Pick(car.GetHashCode()));
+        }
 
-            parkingAreaA.UnPark(car.GetHashCode());
+        [Fact]
+        public void should_not_park_when_parklot_is_full()
+        {
+            var parkingLot = new ParkingLot();
+            var invalidToekn = 0;
 
-            Assert.Null(parkingAreaA.UnPark(car.GetHashCode()));
+            parkingLot.Park(new Car());
+            parkingLot.Park(new Car());
+            parkingLot.Park(new Car());
+            parkingLot.Park(new Car());
+            var parkToken = parkingLot.Park(new Car());
+
+            Assert.Equal(invalidToekn,parkToken);
         }
 
         [Fact]
@@ -55,7 +64,7 @@ namespace OOBootCamp
         {
             var car = new Car();
 
-            var parkingAreaA = new ParkingAreaA();
+            var parkingAreaA = new ParkingLot();
             parkingAreaA.Park(car);
 
             Assert.Equal((uint)3, parkingAreaA.remianParkingSpace()); 
@@ -64,7 +73,7 @@ namespace OOBootCamp
         [Fact]
         public void should_return_4_when_no_car_parking()
         {
-            var parkingAreaA = new ParkingAreaA();
+            var parkingAreaA = new ParkingLot();
 
             Assert.Equal((uint)4, parkingAreaA.remianParkingSpace());
         }
@@ -72,7 +81,7 @@ namespace OOBootCamp
         [Fact]
         public void should_return_0_when_4_cars_parking()
         {
-            var parkingAreaA = new ParkingAreaA();
+            var parkingAreaA = new ParkingLot();
 
             parkingAreaA.Park(new Car());
             parkingAreaA.Park(new Car());
@@ -85,7 +94,7 @@ namespace OOBootCamp
         [Fact]
         public void should_return_0_and_last_car_can_not_parking_when_5_cars_parking()
         {
-            var parkingAreaA = new ParkingAreaA();
+            var parkingAreaA = new ParkingLot();
 
             parkingAreaA.Park(new Car());
             parkingAreaA.Park(new Car());
@@ -101,13 +110,13 @@ namespace OOBootCamp
         [Fact]
         public void should_return_3_when_parking_2_cars_and_unparking_1_car()
         {
-            var parkingAreaA = new ParkingAreaA();
+            var parkingAreaA = new ParkingLot();
 
             var car = new Car();
             parkingAreaA.Park(car);
             parkingAreaA.Park(new Car());
 
-            parkingAreaA.UnPark(car.GetHashCode());
+            parkingAreaA.Pick(car.GetHashCode());
 
             Assert.Equal((uint)3, parkingAreaA.remianParkingSpace());
         }
@@ -115,7 +124,7 @@ namespace OOBootCamp
         [Fact]
         public void should_return_4_when_unpark_all_car()
         {
-            var parkingAreaA = new ParkingAreaA();
+            var parkingAreaA = new ParkingLot();
 
             parkingAreaA.Park(new Car());
             parkingAreaA.Park(new Car());
@@ -127,23 +136,50 @@ namespace OOBootCamp
         }
     }
 
-    public class ParkingAreaA {
-        private const uint DefaultRemainedSpaceNumber = 4;
-        private IList<Car> _allCar;
-        private uint _remainPosition;
-
-        public ParkingAreaA()
+    public class ParkingBoyTest
+    {
+        [Fact]
+        public void should_park_the_pick_one_car()
         {
-            _remainPosition = DefaultRemainedSpaceNumber;
-            _allCar = new List<Car>();
+            var parkingLot = new ParkingLot();
+            var parkingBoy = new ParkingBoy(parkingLot);
+
+            var car = new Car();
+            var token = parkingBoy.Park(car);
+
+            Assert.Same(car,parkingLot.Pick(token));
+        }
+    }
+
+    public class ParkingBoy {
+        public ParkingBoy(ParkingLot parkingLot)
+        {
+            
         }
 
         public int Park(Car car)
         {
-            if (_remainPosition > 0)
+            throw new System.NotImplementedException();
+        }
+    }
+
+    public class ParkingLot {
+        private const uint defaultCapacity = 4;
+        private IList<Car> _carList;
+        private uint _capacity;
+
+        public ParkingLot()
+        {
+            _capacity = defaultCapacity;
+            _carList = new List<Car>();
+        }
+
+        public int Park(Car car)
+        {
+            if (_capacity > 0)
             {
-                _allCar.Add(car);
-                _remainPosition = _remainPosition - 1;
+                _carList.Add(car);
+                _capacity = _capacity - 1;
                 return car.GetHashCode();
             }
             else
@@ -152,14 +188,14 @@ namespace OOBootCamp
             }
         }
 
-        public Car UnPark(int token)
+        public Car Pick(int token)
         {
-            foreach (var car in _allCar)
+            foreach (var car in _carList)
             {
                 if (car.GetHashCode().Equals(token))
                 {
-                    _allCar.Remove(car);
-                    _remainPosition++;
+                    _carList.Remove(car);
+                    _capacity++;
                     return car;
                 }
             }
@@ -168,13 +204,13 @@ namespace OOBootCamp
 
         public IList<Car> UnAllPark()
         {
-            _remainPosition = DefaultRemainedSpaceNumber;
-            return _allCar;
+            _capacity = defaultCapacity;
+            return _carList;
         }
 
         public uint remianParkingSpace()
         {
-            return _remainPosition;
+            return _capacity;
         }
     }
 
