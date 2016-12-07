@@ -6,7 +6,7 @@ namespace OOBootCamp.test
     public class ParkingBoyTest
     {
         [Fact]
-        public void should_park_the_pick_one_car()
+        public void should_park_one_car()
         {
             var parkingLot = new ParkingLot();
             var parkingBoy = new ParkingBoy(parkingLot);
