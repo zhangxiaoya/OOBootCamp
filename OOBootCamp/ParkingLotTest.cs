@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.Remoting.Messaging;
-using System.Xml;
-using Xunit;
+﻿using Xunit;
 
 namespace OOBootCamp
 {
@@ -67,7 +63,7 @@ namespace OOBootCamp
             var parkingAreaA = new ParkingLot();
             parkingAreaA.Park(car);
 
-            Assert.Equal((uint)3, parkingAreaA.remianParkingSpace()); 
+            Assert.Equal((uint)3, parkingAreaA.RemianParkingSpace());
         }
 
         [Fact]
@@ -75,7 +71,7 @@ namespace OOBootCamp
         {
             var parkingAreaA = new ParkingLot();
 
-            Assert.Equal((uint)4, parkingAreaA.remianParkingSpace());
+            Assert.Equal((uint)4, parkingAreaA.RemianParkingSpace());
         }
 
         [Fact]
@@ -88,7 +84,7 @@ namespace OOBootCamp
             parkingAreaA.Park(new Car());
             parkingAreaA.Park(new Car());
 
-            Assert.Equal((uint)0, parkingAreaA.remianParkingSpace());
+            Assert.Equal((uint)0, parkingAreaA.RemianParkingSpace());
         }
 
         [Fact]
@@ -104,7 +100,7 @@ namespace OOBootCamp
 
             Assert.Equal(lastCarParkingStatus,0);
 
-            Assert.Equal((uint)0, parkingAreaA.remianParkingSpace());
+            Assert.Equal((uint)0, parkingAreaA.RemianParkingSpace());
         }
 
         [Fact]
@@ -118,7 +114,7 @@ namespace OOBootCamp
 
             parkingAreaA.Pick(car.GetHashCode());
 
-            Assert.Equal((uint)3, parkingAreaA.remianParkingSpace());
+            Assert.Equal((uint)3, parkingAreaA.RemianParkingSpace());
         }
 
         [Fact]
@@ -132,85 +128,7 @@ namespace OOBootCamp
 
             parkingAreaA.UnAllPark();
 
-            Assert.Equal((uint)4, parkingAreaA.remianParkingSpace());
-        }
-    }
-
-    public class ParkingBoyTest
-    {
-        [Fact]
-        public void should_park_the_pick_one_car()
-        {
-            var parkingLot = new ParkingLot();
-            var parkingBoy = new ParkingBoy(parkingLot);
-
-            var car = new Car();
-            var token = parkingBoy.Park(car);
-
-            Assert.Same(car,parkingLot.Pick(token));
-        }
-    }
-
-    public class ParkingBoy {
-        public ParkingBoy(ParkingLot parkingLot)
-        {
-            
-        }
-
-        public int Park(Car car)
-        {
-            throw new System.NotImplementedException();
-        }
-    }
-
-    public class ParkingLot {
-        private const uint defaultCapacity = 4;
-        private IList<Car> _carList;
-        private uint _capacity;
-
-        public ParkingLot()
-        {
-            _capacity = defaultCapacity;
-            _carList = new List<Car>();
-        }
-
-        public int Park(Car car)
-        {
-            if (_capacity > 0)
-            {
-                _carList.Add(car);
-                _capacity = _capacity - 1;
-                return car.GetHashCode();
-            }
-            else
-            {
-                return 0;
-            }
-        }
-
-        public Car Pick(int token)
-        {
-            foreach (var car in _carList)
-            {
-                if (car.GetHashCode().Equals(token))
-                {
-                    _carList.Remove(car);
-                    _capacity++;
-                    return car;
-                }
-            }
-            return null;
-        }
-
-        public IList<Car> UnAllPark()
-        {
-            _capacity = defaultCapacity;
-            return _carList;
-        }
-
-        public uint remianParkingSpace()
-        {
-            return _capacity;
+            Assert.Equal((uint)4, parkingAreaA.RemianParkingSpace());
         }
     }
 
