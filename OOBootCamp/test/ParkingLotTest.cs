@@ -57,6 +57,29 @@ namespace OOBootCamp.test
         }
 
         [Fact]
+        public void should_be_false_when_parking_lot_is_available()
+        {
+            var parkingLot = new ParkingLot();
+
+            parkingLot.Park(new Car());
+            parkingLot.Park(new Car());
+            parkingLot.Park(new Car());
+            parkingLot.Park(new Car());
+
+            Assert.False(parkingLot.IsAvailable());
+        }
+
+        [Fact]
+        public void should_be_true_when_parking_lot_is_available()
+        {
+            var parkingLot = new ParkingLot();
+
+            parkingLot.Park(new Car());
+
+            Assert.True(parkingLot.IsAvailable());
+        }
+
+        [Fact]
         public void should_return_remain_parking_space()
         {
             var car = new Car();
