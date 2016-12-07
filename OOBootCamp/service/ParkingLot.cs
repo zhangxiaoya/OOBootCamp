@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using OOBootCamp.test;
 
-namespace OOBootCamp
+namespace OOBootCamp.service
 {
     public class ParkingLot {
         private const uint DefaultCapacity = 4;

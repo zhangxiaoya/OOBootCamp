@@ -1,6 +1,7 @@
-﻿using Xunit;
+﻿using OOBootCamp.service;
+using Xunit;
 
-namespace OOBootCamp
+namespace OOBootCamp.test
 {
     public class ParkingLotTest
     {

@@ -1,4 +1,6 @@
-﻿namespace OOBootCamp
+﻿using OOBootCamp.test;
+
+namespace OOBootCamp.service
 {
     public class ParkingBoy {
         private readonly ParkingLot parkingLot;
