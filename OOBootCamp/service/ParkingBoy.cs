@@ -18,7 +18,15 @@ namespace OOBootCamp.service
 
         public Car Pick(int token)
         {
-            return parkingLotList[0].Pick(token);
+            foreach (var parkingLot in parkingLotList)
+            {
+                var pickCar = parkingLot.Pick(token);
+                if (pickCar != null)
+                {
+                    return pickCar;
+                }
+            }
+            return null;
         }
     }
 }
