@@ -45,6 +45,22 @@ namespace OOBootCamp.test
             Assert.Same(car, pickCar);
         }
 
+        [Fact]
+        public void should_pick_one_car_when_have_two_parking_lots()
+        {
+            var parkingLotOne = new ParkingLot();
+            var parkingLotTwo = new ParkingLot();
+            var parkingBoy = new ParkingBoy(new[] { parkingLotOne,parkingLotTwo });
+
+            TakeAllParkingSpaceOfParkingLotOne(parkingLotOne);
+
+            var car = new Car();
+            var token = parkingBoy.Park(car);
+
+            var pickCar = parkingBoy.Pick(token);
+            Assert.Same(car, pickCar);
+        }
+
         private static void TakeAllParkingSpaceOfParkingLotOne(ParkingLot parkingLot1)
         {
             parkingLot1.Park(new Car());
