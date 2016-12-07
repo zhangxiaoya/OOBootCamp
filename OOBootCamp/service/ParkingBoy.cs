@@ -1,18 +1,24 @@
-﻿using OOBootCamp.test;
+﻿using System.Linq;
+using OOBootCamp.test;
 
 namespace OOBootCamp.service
 {
     public class ParkingBoy {
-        private readonly ParkingLot parkingLot;
+        private readonly ParkingLot[] parkingLotList;
 
-        public ParkingBoy(ParkingLot parkingLot)
+        public ParkingBoy(ParkingLot[] parkingLotList)
         {
-            this.parkingLot = parkingLot;
+            this.parkingLotList = parkingLotList;
         }
 
         public int Park(Car car)
         {
-            return parkingLot.Park(car);
+            return (from parkingLot in parkingLotList where parkingLot.IsAvailable() select parkingLot.Park(car)).FirstOrDefault();
+        }
+
+        public Car Pick(int token)
+        {
+            return parkingLotList[0].Pick(token);
         }
     }
 }

@@ -7,20 +7,20 @@ namespace OOBootCamp.service
     public class ParkingLot {
         private const uint DefaultCapacity = 4;
         private readonly IList<Car> carList;
-        private uint capacity;
+        private uint Capacity { get; set; }
 
         public ParkingLot()
         {
-            capacity = DefaultCapacity;
+            Capacity = DefaultCapacity;
             carList = new List<Car>();
         }
 
         public int Park(Car car)
         {
-            if (capacity > 0)
+            if (Capacity > 0)
             {
                 carList.Add(car);
-                capacity = capacity - 1;
+                Capacity = Capacity - 1;
                 return car.GetHashCode();
             }
             else
@@ -33,7 +33,7 @@ namespace OOBootCamp.service
         {
             foreach (var car in carList.Where(car => car.GetHashCode().Equals(token))) {
                 carList.Remove(car);
-                capacity++;
+                Capacity++;
                 return car;
             }
             return null;
@@ -41,13 +41,18 @@ namespace OOBootCamp.service
 
         public IList<Car> UnAllPark()
         {
-            capacity = DefaultCapacity;
+            Capacity = DefaultCapacity;
             return carList;
         }
 
         public uint RemianParkingSpace()
         {
-            return capacity;
+            return Capacity;
+        }
+
+        public bool IsAvailable()
+        {
+            return Capacity > 0;
         }
     }
 }
