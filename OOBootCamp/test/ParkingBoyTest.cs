@@ -24,12 +24,28 @@ namespace OOBootCamp.test
             var parkingLotTwo = new ParkingLot();
             var parkingBoy = new ParkingBoy(new[]{parkingLotOne,parkingLotTwo});
 
-            TakeAllParkingSpaceOfParkingLotOne(parkingLotOne);
+            TakeAllParkingSpaceOfParkingLot(parkingLotOne);
 
             var car = new Car();
             var token = parkingBoy.Park(car);
 
             Assert.Same(car, parkingLotTwo.Pick(token));
+        }
+
+        [Fact]
+        public void should_not_park_one_car_while_no_one_parking_lot_available()
+        {
+            var parkingLotOne = new ParkingLot();
+            var parkingLotTwo = new ParkingLot();
+            var parkingBoy = new ParkingBoy(new[] { parkingLotOne, parkingLotTwo });
+
+            TakeAllParkingSpaceOfParkingLot(parkingLotOne);
+            TakeAllParkingSpaceOfParkingLot(parkingLotTwo);
+
+            var car = new Car();
+
+            var token = parkingBoy.Park(car);
+            Assert.Same(null, parkingLotTwo.Pick(token));
         }
 
         [Fact]
@@ -52,7 +68,7 @@ namespace OOBootCamp.test
             var parkingLotTwo = new ParkingLot();
             var parkingBoy = new ParkingBoy(new[] { parkingLotOne,parkingLotTwo });
 
-            TakeAllParkingSpaceOfParkingLotOne(parkingLotOne);
+            TakeAllParkingSpaceOfParkingLot(parkingLotOne);
 
             var car = new Car();
             var token = parkingBoy.Park(car);
@@ -73,7 +89,7 @@ namespace OOBootCamp.test
             Assert.Same(null, pickCar);
         }
 
-        private static void TakeAllParkingSpaceOfParkingLotOne(ParkingLot parkingLot1)
+        private static void TakeAllParkingSpaceOfParkingLot(ParkingLot parkingLot1)
         {
             parkingLot1.Park(new Car());
             parkingLot1.Park(new Car());
