@@ -10,9 +10,9 @@ namespace OOBootCamp.service
         private readonly IList<Car> carList;
         private uint Capacity { get; set; }
 
-        public ParkingLot()
+        public ParkingLot(uint defaultCapacity = DefaultCapacity)
         {
-            Capacity = DefaultCapacity;
+            Capacity = defaultCapacity;
             carList = new List<Car>();
         }
 
