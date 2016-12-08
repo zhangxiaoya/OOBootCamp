@@ -1,4 +1,5 @@
-﻿using OOBootCamp.service;
+﻿using OOBootCamp.Model;
+using OOBootCamp.service;
 using Xunit;
 
 namespace OOBootCamp.test
@@ -10,8 +11,8 @@ namespace OOBootCamp.test
         {
             var parkingLot = new ParkingLot();
             var parkingBoy = new ParkingBoy(new[]{parkingLot});
-
             var car = new Car();
+
             var token = parkingBoy.Park(car);
 
             Assert.Same(car,parkingLot.Pick(token));
@@ -23,10 +24,9 @@ namespace OOBootCamp.test
             var parkingLotOne = new ParkingLot();
             var parkingLotTwo = new ParkingLot();
             var parkingBoy = new ParkingBoy(new[]{parkingLotOne,parkingLotTwo});
-
             TakeAllParkingSpaceOfParkingLot(parkingLotOne);
-
             var car = new Car();
+
             var token = parkingBoy.Park(car);
 
             Assert.Same(car, parkingLotTwo.Pick(token));
@@ -38,14 +38,14 @@ namespace OOBootCamp.test
             var parkingLotOne = new ParkingLot();
             var parkingLotTwo = new ParkingLot();
             var parkingBoy = new ParkingBoy(new[] { parkingLotOne, parkingLotTwo });
-
             TakeAllParkingSpaceOfParkingLot(parkingLotOne);
             TakeAllParkingSpaceOfParkingLot(parkingLotTwo);
-
             var car = new Car();
 
-            var token = parkingBoy.Park(car);
-            Assert.Same(null, parkingLotTwo.Pick(token));
+            var illegaltoken = parkingBoy.Park(car);
+
+            Assert.Same(null, parkingLotOne.Pick(illegaltoken));
+            Assert.Same(null, parkingLotTwo.Pick(illegaltoken));
         }
 
         [Fact]
@@ -53,8 +53,8 @@ namespace OOBootCamp.test
         {
             var parkingLot = new ParkingLot();
             var parkingBoy = new ParkingBoy(new[] { parkingLot});
-
             var car = new Car();
+
             var token = parkingBoy.Park(car);
 
             var pickCar = parkingBoy.Pick(token);
@@ -67,10 +67,9 @@ namespace OOBootCamp.test
             var parkingLotOne = new ParkingLot();
             var parkingLotTwo = new ParkingLot();
             var parkingBoy = new ParkingBoy(new[] { parkingLotOne,parkingLotTwo });
-
             TakeAllParkingSpaceOfParkingLot(parkingLotOne);
-
             var car = new Car();
+
             var token = parkingBoy.Park(car);
 
             var pickCar = parkingBoy.Pick(token);
@@ -82,19 +81,19 @@ namespace OOBootCamp.test
         {
             var parkingLot = new ParkingLot();
             var parkingBoy = new ParkingBoy(new[] { parkingLot });
-
             const int illegalToken = 0;
 
             var pickCar = parkingBoy.Pick(illegalToken);
+
             Assert.Same(null, pickCar);
         }
 
-        private static void TakeAllParkingSpaceOfParkingLot(ParkingLot parkingLot1)
+        private static void TakeAllParkingSpaceOfParkingLot(ParkingLot parkingLot)
         {
-            parkingLot1.Park(new Car());
-            parkingLot1.Park(new Car());
-            parkingLot1.Park(new Car());
-            parkingLot1.Park(new Car());
+            parkingLot.Park(new Car());
+            parkingLot.Park(new Car());
+            parkingLot.Park(new Car());
+            parkingLot.Park(new Car());
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using OOBootCamp.Model;
 using OOBootCamp.test;
 
 namespace OOBootCamp.service
@@ -23,10 +24,7 @@ namespace OOBootCamp.service
                 Capacity = Capacity - 1;
                 return car.GetHashCode();
             }
-            else
-            {
-                return 0;
-            }
+            return 0;
         }
 
         public Car Pick(int token)

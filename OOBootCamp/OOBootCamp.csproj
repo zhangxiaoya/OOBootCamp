@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="FirstTest.cs" />
     <Compile Include="service\ParkingBoy.cs" />
+    <Compile Include="Model\Car.cs" />
     <Compile Include="test\ParkingBoyTest.cs" />
     <Compile Include="service\ParkingLot.cs" />
     <Compile Include="Program.cs" />
