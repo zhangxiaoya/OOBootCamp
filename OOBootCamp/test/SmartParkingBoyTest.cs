@@ -35,6 +35,31 @@ namespace OOBootCamp.test
             Assert.Same(car, AssertOneOfIsTrue(new[]{actuaPickedCarFromParkingLotOne, actuaPickedCarFromParkingLotTwo}));
         }
 
+        [Fact]
+        public void should_pick_car_while_only_one_paring_lot()
+        {
+            var parkingLot = new ParkingLot(2);
+            var samrtParkingBoy = new SamrtParkingBoy(new[] { parkingLot});
+            var car = new Car();
+
+            var token = samrtParkingBoy.Park(car);
+
+            Assert.Same(car, samrtParkingBoy.Pick(token));
+        }
+
+        [Fact]
+        public void should_pick_car_while_have_two_paring_lots()
+        {
+            var parkingLotOne = new ParkingLot(2);
+            var parkingLotTwo = new ParkingLot(3);
+            var samrtParkingBoy = new SamrtParkingBoy(new[] { parkingLotOne, parkingLotTwo });
+            var car = new Car();
+
+            var token = samrtParkingBoy.Park(car);
+
+            Assert.Same(car, samrtParkingBoy.Pick(token));
+        }
+
         private static Car AssertOneOfIsTrue(IEnumerable<Car> cars)
         {
             var count = 0;

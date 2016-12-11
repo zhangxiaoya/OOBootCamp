@@ -24,5 +24,10 @@ namespace OOBootCamp.service
             }
             return maxSpaceParkingLot;
         }
+
+        public Car Pick(int token)
+        {
+            return parkingLots.Select(parkingLot => parkingLot.Pick(token)).FirstOrDefault(pick => pick != null);
+        }
     }
 }
