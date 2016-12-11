@@ -12,7 +12,7 @@ namespace OOBootCamp.test
         public void should_park_car_while_only_one_parking_lots()
         {
             var parkingLot = new ParkingLot(2);
-            var samrtParkingBoy = new SamrtParkingBoy(new[] { parkingLot });
+            var samrtParkingBoy = new SamrtParkingBoy(new[] {parkingLot});
             var car = new Car();
 
             var token = samrtParkingBoy.Park(car);
@@ -31,15 +31,15 @@ namespace OOBootCamp.test
             var token = samrtParkingBoy.Park(car);
 
             var actuaPickedCarFromParkingLotOne = parkingLotOne.Pick(token);
-            var actuaPickedCarFromParkingLotTwo = parkingLotOne.Pick(token);
-            Assert.Same(car, AssertOneOfIsTrue(new[]{actuaPickedCarFromParkingLotOne, actuaPickedCarFromParkingLotTwo}));
+            var actuaPickedCarFromParkingLotTwo = parkingLotTwo.Pick(token);
+            Assert.Same(car, AssertOneOfIsTrue(new[] {actuaPickedCarFromParkingLotOne, actuaPickedCarFromParkingLotTwo}));
         }
 
         [Fact]
         public void should_pick_car_while_only_one_paring_lot()
         {
             var parkingLot = new ParkingLot(2);
-            var samrtParkingBoy = new SamrtParkingBoy(new[] { parkingLot});
+            var samrtParkingBoy = new SamrtParkingBoy(new[] {parkingLot});
             var car = new Car();
 
             var token = samrtParkingBoy.Park(car);
@@ -52,7 +52,7 @@ namespace OOBootCamp.test
         {
             var parkingLotOne = new ParkingLot(2);
             var parkingLotTwo = new ParkingLot(3);
-            var samrtParkingBoy = new SamrtParkingBoy(new[] { parkingLotOne, parkingLotTwo });
+            var samrtParkingBoy = new SamrtParkingBoy(new[] {parkingLotOne, parkingLotTwo});
             var car = new Car();
 
             var token = samrtParkingBoy.Park(car);
@@ -68,7 +68,7 @@ namespace OOBootCamp.test
                 count++;
                 acturalCar = car;
             }
-            return count != 1 ? acturalCar : null;
+            return count != 1 ? null : acturalCar;
         }
     }
 }

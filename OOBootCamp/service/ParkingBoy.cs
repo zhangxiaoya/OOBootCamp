@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using OOBootCamp.Model;
-using OOBootCamp.test;
 
 namespace OOBootCamp.service
 {
@@ -19,15 +18,7 @@ namespace OOBootCamp.service
 
         public Car Pick(int token)
         {
-            foreach (var parkingLot in parkingLotList)
-            {
-                var pickCar = parkingLot.Pick(token);
-                if (pickCar != null)
-                {
-                    return pickCar;
-                }
-            }
-            return null;
+            return parkingLotList.Select(parkingLot => parkingLot.Pick(token)).FirstOrDefault(pickCar => pickCar != null);
         }
     }
 }
