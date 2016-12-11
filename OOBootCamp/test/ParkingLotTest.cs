@@ -1,4 +1,5 @@
-﻿using OOBootCamp.service;
+﻿using OOBootCamp.Model;
+using OOBootCamp.service;
 using Xunit;
 
 namespace OOBootCamp.test
@@ -155,6 +156,4 @@ namespace OOBootCamp.test
             Assert.Equal((uint)4, parkingAreaA.RemianParkingSpace());
         }
     }
-
-    public class Car {}
 }

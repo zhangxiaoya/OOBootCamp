@@ -64,11 +64,14 @@
   <ItemGroup>
     <Compile Include="FirstTest.cs" />
     <Compile Include="service\ParkingBoy.cs" />
+    <Compile Include="Model\Car.cs" />
     <Compile Include="test\ParkingBoyTest.cs" />
     <Compile Include="service\ParkingLot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="test\ParkingLotTest.cs" />
+    <Compile Include="test\SamrtParkingBoy.cs" />
+    <Compile Include="test\SmartParkingBoyTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
