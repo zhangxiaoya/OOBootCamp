@@ -70,7 +70,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="test\ParkingLotTest.cs" />
-    <Compile Include="test\SamrtParkingBoy.cs" />
+    <Compile Include="service\SamrtParkingBoy.cs" />
     <Compile Include="test\SmartParkingBoyTest.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,8 +1,7 @@
 ﻿using System.Linq;
 using OOBootCamp.Model;
-using OOBootCamp.service;
 
-namespace OOBootCamp.test
+namespace OOBootCamp.service
 {
     public class SamrtParkingBoy {
         private readonly ParkingLot[] parkingLots;
@@ -24,6 +23,11 @@ namespace OOBootCamp.test
                 maxSpaceParkingLot = parkingLot;
             }
             return maxSpaceParkingLot;
+        }
+
+        public Car Pick(int token)
+        {
+            return parkingLots.Select(parkingLot => parkingLot.Pick(token)).FirstOrDefault(pick => pick != null);
         }
     }
 }
