@@ -1,8 +1,7 @@
 ﻿using System.Linq;
 using OOBootCamp.Model;
-using OOBootCamp.service;
 
-namespace OOBootCamp.test
+namespace OOBootCamp.service
 {
     public class SamrtParkingBoy {
         private readonly ParkingLot[] parkingLots;
