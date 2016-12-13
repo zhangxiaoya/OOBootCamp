@@ -3,7 +3,8 @@ using OOBootCamp.Model;
 
 namespace OOBootCamp.service
 {
-    public class SamrtParkingBoy {
+    public class SamrtParkingBoy
+    {
         private readonly ParkingLot[] parkingLots;
 
         public SamrtParkingBoy(ParkingLot[] parkingLots)
@@ -19,7 +20,8 @@ namespace OOBootCamp.service
         private ParkingLot GetParkingLotWithMoreParkingSpace()
         {
             var maxSpaceParkingLot = parkingLots[0];
-            foreach (var parkingLot in parkingLots.Where(parkingLot => parkingLot.RemianParkingSpace() > maxSpaceParkingLot.RemianParkingSpace())) {
+            foreach (var parkingLot in parkingLots.Where(parkingLot => parkingLot.RemianParkingSpace() > maxSpaceParkingLot.RemianParkingSpace()))
+            {
                 maxSpaceParkingLot = parkingLot;
             }
             return maxSpaceParkingLot;
