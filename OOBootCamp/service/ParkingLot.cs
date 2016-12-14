@@ -7,20 +7,22 @@ namespace OOBootCamp.service
     public class ParkingLot {
         private const uint DefaultCapacity = 4;
         private readonly IList<Car> carList;
+        private uint RemainCount { get; set; }
         private uint Capacity { get; set; }
 
-        public ParkingLot(uint defaultCapacity = DefaultCapacity)
+        public ParkingLot(uint defaultcapacity = DefaultCapacity)
         {
-            Capacity = defaultCapacity;
+            RemainCount = defaultcapacity;
+            Capacity = defaultcapacity;
             carList = new List<Car>();
         }
 
         public int Park(Car car)
         {
-            if (Capacity > 0)
+            if (RemainCount > 0)
             {
                 carList.Add(car);
-                Capacity = Capacity - 1;
+                RemainCount = RemainCount - 1;
                 return car.GetHashCode();
             }
             return 0;
@@ -30,7 +32,7 @@ namespace OOBootCamp.service
         {
             foreach (var car in carList.Where(car => car.GetHashCode().Equals(token))) {
                 carList.Remove(car);
-                Capacity++;
+                RemainCount++;
                 return car;
             }
             return null;
@@ -38,18 +40,23 @@ namespace OOBootCamp.service
 
         public IList<Car> UnAllPark()
         {
-            Capacity = DefaultCapacity;
+            RemainCount = DefaultCapacity;
             return carList;
         }
 
         public uint RemianParkingSpace()
         {
-            return Capacity;
+            return RemainCount;
         }
 
         public bool IsAvailable()
         {
-            return Capacity > 0;
+            return RemainCount > 0;
+        }
+
+        public double GetVacancyRate()
+        {
+            return (double)RemainCount / (double)Capacity;
         }
     }
 }
