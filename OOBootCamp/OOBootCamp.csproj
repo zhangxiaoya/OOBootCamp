@@ -72,6 +72,7 @@
     <Compile Include="test\ParkingLotTest.cs" />
     <Compile Include="service\SamrtParkingBoy.cs" />
     <Compile Include="test\SmartParkingBoyTest.cs" />
+    <Compile Include="test\SuperParkingBoyTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
