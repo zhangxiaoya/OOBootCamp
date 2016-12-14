@@ -65,6 +65,8 @@
     <Compile Include="FirstTest.cs" />
     <Compile Include="service\ParkingBoy.cs" />
     <Compile Include="Model\Car.cs" />
+    <Compile Include="service\ParkingBoyBase.cs" />
+    <Compile Include="service\SuperParkingBoy.cs" />
     <Compile Include="test\ParkingBoyTest.cs" />
     <Compile Include="service\ParkingLot.cs" />
     <Compile Include="Program.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="test\ParkingLotTest.cs" />
     <Compile Include="service\SamrtParkingBoy.cs" />
     <Compile Include="test\SmartParkingBoyTest.cs" />
+    <Compile Include="test\SuperParkingBoyTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
