@@ -63,6 +63,26 @@ namespace OOBootCamp.test
             Assert.Same(car, CarParkingInOneOfParkingLots(new []{parkingLot.Pick(carToken),parkingLotWithSameRate.Pick(carToken)}));
         }
 
+        [Fact]
+        public void should_pick_correct_car()
+        {
+            var parkingLotWithHighVacancyRate = new ParkingLot(4);
+            var parkingLotWithLowVacancyRate = new ParkingLot(3);
+            var superParkingBoy = new SuperParkingBoy(new[]
+            {
+                parkingLotWithHighVacancyRate,
+                parkingLotWithLowVacancyRate
+            });
+            parkingLotWithLowVacancyRate.Park(new Car());
+            parkingLotWithHighVacancyRate.Park(new Car());
+            var car = new Car();
+
+            var carToken = parkingLotWithHighVacancyRate.Park(car);
+
+            Assert.Same(car, superParkingBoy.Pick(carToken));
+        }
+
+
         private static Car CarParkingInOneOfParkingLots(Car[] cars)
         {
             var count = 0;

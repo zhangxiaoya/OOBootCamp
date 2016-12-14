@@ -3,12 +3,10 @@ using OOBootCamp.Model;
 
 namespace OOBootCamp.service
 {
-    public class SuperParkingBoy
+    public class SuperParkingBoy : ParkingBoyBase
     {
-        private readonly IList<ParkingLot> parkingLots;
-        public SuperParkingBoy(IList<ParkingLot> parkingLots)
+        public SuperParkingBoy(IList<ParkingLot> parkingLots) :base(parkingLots)
         {
-            this.parkingLots = parkingLots;
         }
 
         public int Park(Car car)
@@ -18,8 +16,8 @@ namespace OOBootCamp.service
 
         private ParkingLot GetParkingLotWithHighVacancyRate()
         {
-            var parkingPotWithHighVacancyRate = parkingLots[0];
-            foreach (var parkingLot in parkingLots)
+            var parkingPotWithHighVacancyRate = ParkingLotList[0];
+            foreach (var parkingLot in ParkingLotList)
             {
                 if (parkingLot.GetVacancyRate() > parkingPotWithHighVacancyRate.GetVacancyRate())
                 {
