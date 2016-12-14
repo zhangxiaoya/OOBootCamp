@@ -63,7 +63,6 @@ namespace OOBootCamp.test
             Assert.Same(car, actuaPickedCarFromParkingLotTwo);
         }
 
-
         [Fact]
         public void should_pick_car_while_only_one_paring_lot()
         {
