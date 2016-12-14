@@ -43,6 +43,39 @@ namespace OOBootCamp.test
 
             Assert.Same(carParingSecondTime, parkingLotWithHighRate.Pick(firstTimeParkingCarToken));
         }
-    
+
+        [Fact]
+        public void should_park_one_car_to_one_of_parking_lots_while_all_have_same_cacancy_rate()
+        {
+            var parkingLot = new ParkingLot(2);
+            var parkingLotWithSameRate = new ParkingLot(2);
+            var superParkingBoy = new SuperParkingBoy(new[]
+            {
+                parkingLot,
+                parkingLotWithSameRate
+            });
+            parkingLotWithSameRate.Park(new Car());
+            parkingLot.Park(new Car());
+            var car = new Car();
+
+            var carToken = superParkingBoy.Park(car);
+
+            Assert.Same(car, CarParkingInOneOfParkingLots(new []{parkingLot.Pick(carToken),parkingLotWithSameRate.Pick(carToken)}));
+        }
+
+        private static Car CarParkingInOneOfParkingLots(Car[] cars)
+        {
+            var count = 0;
+            Car pickedCar = null;
+            foreach (var car in cars)
+            {
+                if (car != null)
+                {
+                    count ++;
+                    pickedCar = car;
+                }
+            }
+            return count == 1 ? pickedCar : null;
+        }
     }
 }
