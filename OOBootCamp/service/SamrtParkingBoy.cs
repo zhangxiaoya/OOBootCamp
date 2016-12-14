@@ -3,13 +3,10 @@ using OOBootCamp.Model;
 
 namespace OOBootCamp.service
 {
-    public class SamrtParkingBoy
+    public class SamrtParkingBoy : ParkingBoyBase
     {
-        private readonly ParkingLot[] parkingLots;
-
-        public SamrtParkingBoy(ParkingLot[] parkingLots)
+        public SamrtParkingBoy(ParkingLot[] parkingLots) : base(parkingLots)
         {
-            this.parkingLots = parkingLots;
         }
 
         public int Park(Car car)
@@ -19,17 +16,12 @@ namespace OOBootCamp.service
 
         private ParkingLot GetParkingLotWithMoreParkingSpace()
         {
-            var maxSpaceParkingLot = parkingLots[0];
-            foreach (var parkingLot in parkingLots.Where(parkingLot => parkingLot.RemianParkingSpace() > maxSpaceParkingLot.RemianParkingSpace()))
+            var maxSpaceParkingLot = ParkingLotList[0];
+            foreach (var parkingLot in ParkingLotList.Where(parkingLot => parkingLot.RemianParkingSpace() > maxSpaceParkingLot.RemianParkingSpace()))
             {
                 maxSpaceParkingLot = parkingLot;
             }
             return maxSpaceParkingLot;
-        }
-
-        public Car Pick(int token)
-        {
-            return parkingLots.Select(parkingLot => parkingLot.Pick(token)).FirstOrDefault(pick => pick != null);
         }
     }
 }
