@@ -1,4 +1,5 @@
-﻿using OOBootCamp.Model;
+﻿using System.Collections.Generic;
+using OOBootCamp.Model;
 using OOBootCamp.service;
 using Xunit;
 
@@ -9,11 +10,9 @@ namespace OOBootCamp.test
         [Fact]
         public void should_park_one_car_to_parking_lot_which_have_high_vacancy_rate_first_test()
         {
-            var parkingLotWithHighRate = new ParkingLot(4);
-            parkingLotWithHighRate.Park(new Car());
-            var parkingLotWithLowRate = new ParkingLot(3);
-            parkingLotWithLowRate.Park(new Car());
-            var superParkingBoy = new SuperParkingBoy(new []
+            var parkingLotWithHighRate = CreateParkingLotAndParkSomeCar(4, 1);
+            var parkingLotWithLowRate = CreateParkingLotAndParkSomeCar(3, 1);
+            var superParkingBoy = new SuperParkingBoy(new List<ParkingLot>
             {
                 parkingLotWithHighRate,
                 parkingLotWithLowRate
@@ -25,18 +24,26 @@ namespace OOBootCamp.test
             Assert.Same(car,parkingLotWithHighRate.Pick(carToken));
         }
 
+        private static ParkingLot CreateParkingLotAndParkSomeCar(uint capacity, int carNumber)
+        {
+            var parkingLotWithHighRate = new ParkingLot(capacity);
+            while (carNumber-- != 0)
+            {
+                parkingLotWithHighRate.Park(new Car());
+            }
+            return parkingLotWithHighRate;
+        }
+
         [Fact]
         public void should_park_one_car_to_parking_lot_which_have_high_vacancy_rate_second_test()
         {
-            var parkingLotWithLowRate = new ParkingLot(2);
-            var parkingLotWithHighRate = new ParkingLot(3);
+            var parkingLotWithLowRate = CreateParkingLotAndParkSomeCar(2,1);
+            var parkingLotWithHighRate = CreateParkingLotAndParkSomeCar(3,1);
             var superParkingBoy = new SuperParkingBoy(new[]
             {
                 parkingLotWithLowRate,
                 parkingLotWithHighRate
             });
-            parkingLotWithHighRate.Park(new Car());
-            parkingLotWithLowRate.Park(new Car());
             var car = new Car();
 
             var carToken = superParkingBoy.Park(car);
@@ -47,12 +54,8 @@ namespace OOBootCamp.test
         [Fact]
         public void should_park_one_car_to_parking_lot_which_have_high_vacancy_rate_and_less_parking_space()
         {
-            var parkingLotWithHighRate = new ParkingLot(3);
-            parkingLotWithHighRate.Park(new Car());
-            var parkingLotWithLowRate = new ParkingLot(6);
-            parkingLotWithLowRate.Park(new Car());
-            parkingLotWithLowRate.Park(new Car());
-            parkingLotWithLowRate.Park(new Car());
+            var parkingLotWithHighRate = CreateParkingLotAndParkSomeCar(3,1);
+            var parkingLotWithLowRate = CreateParkingLotAndParkSomeCar(6,3);
             var superParkingBoy = new SuperParkingBoy(new[]
             {
                 parkingLotWithHighRate,

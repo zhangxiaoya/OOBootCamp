@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using OOBootCamp.Model;
 
 namespace OOBootCamp.service
 {
@@ -7,9 +6,10 @@ namespace OOBootCamp.service
         public ParkingBoy(ParkingLot[] parkingLotList):base(parkingLotList)
         {
         }
-        public int Park(Car car)
+
+        protected override ParkingLot GetParkingLot()
         {
-            return (from parkingLot in ParkingLotList where parkingLot.IsAvailable() select parkingLot.Park(car)).FirstOrDefault();
+            return ParkingLotList.FirstOrDefault(parkingLot => parkingLot.IsAvailable()) ?? ParkingLotList[0];
         }
     }
 }

@@ -9,12 +9,7 @@ namespace OOBootCamp.service
         {
         }
 
-        public int Park(Car car)
-        {
-            return GetParkingLotWithHighVacancyRate().Park(car);
-        }
-
-        private ParkingLot GetParkingLotWithHighVacancyRate()
+        protected override ParkingLot GetParkingLot()
         {
             var parkingPotWithHighVacancyRate = ParkingLotList[0];
             foreach (var parkingLot in ParkingLotList)

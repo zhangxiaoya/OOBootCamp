@@ -9,12 +9,7 @@ namespace OOBootCamp.service
         {
         }
 
-        public int Park(Car car)
-        {
-            return GetParkingLotWithMoreParkingSpace().Park(car);
-        }
-
-        private ParkingLot GetParkingLotWithMoreParkingSpace()
+        protected override ParkingLot GetParkingLot()
         {
             var maxSpaceParkingLot = ParkingLotList[0];
             foreach (var parkingLot in ParkingLotList.Where(parkingLot => parkingLot.RemianParkingSpace() > maxSpaceParkingLot.RemianParkingSpace()))
