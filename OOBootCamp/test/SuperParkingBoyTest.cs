@@ -7,26 +7,26 @@ namespace OOBootCamp.test
     public class SuperParkingBoyTest
     {
         [Fact]
-        public void should_park_one_car_to_parking_lot_which_have_high_cacancy_rate_first_test()
+        public void should_park_one_car_to_parking_lot_which_have_high_vacancy_rate_first_test()
         {
             var parkingLotWithHighRate = new ParkingLot(4);
+            parkingLotWithHighRate.Park(new Car());
             var parkingLotWithLowRate = new ParkingLot(3);
+            parkingLotWithLowRate.Park(new Car());
             var superParkingBoy = new SuperParkingBoy(new []
             {
                 parkingLotWithHighRate,
                 parkingLotWithLowRate
             });
-            parkingLotWithHighRate.Park(new Car());
-            parkingLotWithLowRate.Park(new Car());
-            var carParingFirstTime = new Car();
+            var car = new Car();
 
-            var firstTimeParkingCarToken = superParkingBoy.Park(carParingFirstTime);
+            var carToken = superParkingBoy.Park(car);
 
-            Assert.Same(carParingFirstTime,parkingLotWithHighRate.Pick(firstTimeParkingCarToken));
+            Assert.Same(car,parkingLotWithHighRate.Pick(carToken));
         }
 
         [Fact]
-        public void should_park_one_car_to_parking_lot_which_have_high_cacancy_rate_second_test()
+        public void should_park_one_car_to_parking_lot_which_have_high_vacancy_rate_second_test()
         {
             var parkingLotWithLowRate = new ParkingLot(2);
             var parkingLotWithHighRate = new ParkingLot(3);
@@ -37,15 +37,37 @@ namespace OOBootCamp.test
             });
             parkingLotWithHighRate.Park(new Car());
             parkingLotWithLowRate.Park(new Car());
-            var carParingSecondTime = new Car();
+            var car = new Car();
 
-            var firstTimeParkingCarToken = superParkingBoy.Park(carParingSecondTime);
+            var carToken = superParkingBoy.Park(car);
 
-            Assert.Same(carParingSecondTime, parkingLotWithHighRate.Pick(firstTimeParkingCarToken));
+            Assert.Same(car, parkingLotWithHighRate.Pick(carToken));
         }
 
         [Fact]
-        public void should_park_one_car_to_one_of_parking_lots_while_all_have_same_cacancy_rate()
+        public void should_park_one_car_to_parking_lot_which_have_high_vacancy_rate_and_less_parking_space()
+        {
+            var parkingLotWithHighRate = new ParkingLot(3);
+            parkingLotWithHighRate.Park(new Car());
+            var parkingLotWithLowRate = new ParkingLot(6);
+            parkingLotWithLowRate.Park(new Car());
+            parkingLotWithLowRate.Park(new Car());
+            parkingLotWithLowRate.Park(new Car());
+            var superParkingBoy = new SuperParkingBoy(new[]
+            {
+                parkingLotWithHighRate,
+                parkingLotWithLowRate
+            });
+            var car = new Car();
+
+            var carToken = superParkingBoy.Park(car);
+
+            Assert.Same(car, parkingLotWithHighRate.Pick(carToken));
+        }
+
+
+        [Fact]
+        public void should_park_one_car_to_one_of_parking_lots_while_all_have_same_vacancy_rate()
         {
             var parkingLot = new ParkingLot(2);
             var parkingLotWithSameRate = new ParkingLot(2);
@@ -66,7 +88,7 @@ namespace OOBootCamp.test
         [Fact]
         public void should_pick_correct_car()
         {
-            var parkingLotWithHighVacancyRate = new ParkingLot(4);
+            var parkingLotWithHighVacancyRate = new ParkingLot(5);
             var parkingLotWithLowVacancyRate = new ParkingLot(3);
             var superParkingBoy = new SuperParkingBoy(new[]
             {

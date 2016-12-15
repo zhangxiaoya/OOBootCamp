@@ -10,7 +10,7 @@ namespace OOBootCamp.service
         private uint RemainCount { get; set; }
         private uint Capacity { get; set; }
 
-        public ParkingLot(uint defaultcapacity = DefaultCapacity)
+        public ParkingLot(uint defaultcapacity)
         {
             RemainCount = defaultcapacity;
             Capacity = defaultcapacity;
@@ -36,12 +36,6 @@ namespace OOBootCamp.service
                 return car;
             }
             return null;
-        }
-
-        public IList<Car> UnAllPark()
-        {
-            RemainCount = DefaultCapacity;
-            return carList;
         }
 
         public uint RemianParkingSpace()
