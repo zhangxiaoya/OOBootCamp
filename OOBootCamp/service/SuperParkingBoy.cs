@@ -1,13 +1,10 @@
 ﻿using System.Collections.Generic;
-using OOBootCamp.Model;
 
 namespace OOBootCamp.service
 {
     public class SuperParkingBoy : ParkingBoyBase
     {
-        public SuperParkingBoy(IList<ParkingLot> parkingLots) :base(parkingLots)
-        {
-        }
+        public SuperParkingBoy(IList<ParkingLot> parkingLots) : base(parkingLots) {}
 
         protected override ParkingLot GetParkingLot()
         {

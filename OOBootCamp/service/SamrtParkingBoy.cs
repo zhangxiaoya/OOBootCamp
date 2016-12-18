@@ -1,13 +1,10 @@
 ﻿using System.Linq;
-using OOBootCamp.Model;
 
 namespace OOBootCamp.service
 {
     public class SamrtParkingBoy : ParkingBoyBase
     {
-        public SamrtParkingBoy(ParkingLot[] parkingLots) : base(parkingLots)
-        {
-        }
+        public SamrtParkingBoy(ParkingLot[] parkingLots) : base(parkingLots) {}
 
         protected override ParkingLot GetParkingLot()
         {

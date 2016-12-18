@@ -2,10 +2,9 @@
 
 namespace OOBootCamp.service
 {
-    public class ParkingBoy : ParkingBoyBase{
-        public ParkingBoy(ParkingLot[] parkingLotList):base(parkingLotList)
-        {
-        }
+    public class ParkingBoy : ParkingBoyBase
+    {
+        public ParkingBoy(ParkingLot[] parkingLotList) : base(parkingLotList) {}
 
         protected override ParkingLot GetParkingLot()
         {
