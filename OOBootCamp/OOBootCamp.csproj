@@ -66,6 +66,7 @@
     <Compile Include="service\ParkingBoy.cs" />
     <Compile Include="Model\Car.cs" />
     <Compile Include="service\ParkingBoyBase.cs" />
+    <Compile Include="service\ParkingManager.cs" />
     <Compile Include="service\SuperParkingBoy.cs" />
     <Compile Include="test\ParkingBoyTest.cs" />
     <Compile Include="service\ParkingLot.cs" />
