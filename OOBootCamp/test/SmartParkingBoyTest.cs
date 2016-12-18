@@ -12,7 +12,7 @@ namespace OOBootCamp.test
         public void should_park_car_while_only_one_parking_lots()
         {
             var parkingLot = new ParkingLot(2);
-            var samrtParkingBoy = new SamrtParkingBoy(new[] {parkingLot});
+            var samrtParkingBoy = new SmartParkingBoy(new[] {parkingLot});
             var car = new Car();
 
             var token = samrtParkingBoy.Park(car);
@@ -25,7 +25,7 @@ namespace OOBootCamp.test
         {
             var parkingLotWithLessUnusedParkingSpace = new ParkingLot(2);
             var parkingLotWithMoreUnusedParkingSpace = new ParkingLot(3);
-            var samrtParkingBoy = new SamrtParkingBoy(new[] { parkingLotWithLessUnusedParkingSpace, parkingLotWithMoreUnusedParkingSpace });
+            var samrtParkingBoy = new SmartParkingBoy(new[] { parkingLotWithLessUnusedParkingSpace, parkingLotWithMoreUnusedParkingSpace });
             var car = new Car();
 
             var token = samrtParkingBoy.Park(car);
@@ -38,7 +38,7 @@ namespace OOBootCamp.test
         {
             var parkingLotWithLessParkingSpace = new ParkingLot(2);
             var parkingLotWithMoreParkingSpace = new ParkingLot(2);
-            var samrtParkingBoy = new SamrtParkingBoy(new[] {parkingLotWithLessParkingSpace, parkingLotWithMoreParkingSpace});
+            var samrtParkingBoy = new SmartParkingBoy(new[] {parkingLotWithLessParkingSpace, parkingLotWithMoreParkingSpace});
             var car = new Car();
 
             var token = samrtParkingBoy.Park(car);
@@ -54,7 +54,7 @@ namespace OOBootCamp.test
             var P1 = new ParkingLot(1);
             var P2 = new ParkingLot(3);
             var P3 = new ParkingLot(2);
-            var samrtParkingBoy = new SamrtParkingBoy(new[] { P1, P2, P3 });
+            var samrtParkingBoy = new SmartParkingBoy(new[] { P1, P2, P3 });
             var car = new Car();
 
             var token = samrtParkingBoy.Park(car);
@@ -67,7 +67,7 @@ namespace OOBootCamp.test
         public void should_pick_car_while_only_one_paring_lot()
         {
             var parkingLot = new ParkingLot(2);
-            var samrtParkingBoy = new SamrtParkingBoy(new[] {parkingLot});
+            var samrtParkingBoy = new SmartParkingBoy(new[] {parkingLot});
             var car = new Car();
 
             var token = samrtParkingBoy.Park(car);
@@ -80,7 +80,7 @@ namespace OOBootCamp.test
         {
             var parkingLotOne = new ParkingLot(2);
             var parkingLotTwo = new ParkingLot(3);
-            var samrtParkingBoy = new SamrtParkingBoy(new[] {parkingLotOne, parkingLotTwo});
+            var samrtParkingBoy = new SmartParkingBoy(new[] {parkingLotOne, parkingLotTwo});
             var car = new Car();
             var token = parkingLotTwo.Park(car);
 

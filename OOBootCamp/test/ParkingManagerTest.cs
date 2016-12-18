@@ -13,8 +13,8 @@ namespace OOBootCamp.test
             var firstParkingLot = new ParkingLot(5);
             var parkingBoy = new ParkingBoy(new[] {firstParkingLot, secondParkingLot});
             var parkingManager = new ParkingManager(parkingBoy);
-
             var car = new Car();
+
             var carToken = parkingManager.SimplePark(car);
 
             Assert.Same(car,firstParkingLot.Pick(carToken));
@@ -23,6 +23,15 @@ namespace OOBootCamp.test
         [Fact]
         public void should_ask_smart_parking_boy_park_one_car_to_parking_lot_with_most_empty_parking_space()
         {
+            var parkingLotWithLessEmptyParkSpace = new ParkingLot(3);
+            var parkingLotWithMoreEmptyParkSpace = new ParkingLot(5);
+            var smartParkingBoy = new SmartParkingBoy(new[]{parkingLotWithLessEmptyParkSpace,parkingLotWithMoreEmptyParkSpace});
+            var parkingManager = new ParkingManager(smartParkingBoy:smartParkingBoy);
+            var car = new Car();
+
+            var carToken = parkingManager.SmartPark(car);
+
+            Assert.Same(car,parkingLotWithMoreEmptyParkSpace.Pick(carToken));
         }
 
         [Fact]

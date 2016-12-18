@@ -2,9 +2,9 @@
 
 namespace OOBootCamp.service
 {
-    public class SamrtParkingBoy : ParkingBoyBase
+    public class SmartParkingBoy : ParkingBoyBase
     {
-        public SamrtParkingBoy(ParkingLot[] parkingLots) : base(parkingLots)
+        public SmartParkingBoy(ParkingLot[] parkingLots) : base(parkingLots)
         {
             ParkAction = (car) => GetParkingLotWithMaxEmptySpaceCount().Park(car);
         }
