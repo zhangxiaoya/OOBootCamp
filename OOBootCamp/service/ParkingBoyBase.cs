@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using OOBootCamp.Model;
 
@@ -6,7 +7,7 @@ namespace OOBootCamp.service
 {
     public abstract class ParkingBoyBase {
         protected readonly ParkingLot[] ParkingLotList;
-
+        protected Func<Car, int> ParkAction;
         protected ParkingBoyBase(IList<ParkingLot> parkingLotList)
         {
             ParkingLotList = parkingLotList.ToArray();
@@ -19,9 +20,7 @@ namespace OOBootCamp.service
 
         public int Park(Car car)
         {
-            return GetParkingLot().Park(car);
+            return ParkAction(car);
         }
-
-        protected abstract ParkingLot GetParkingLot();
     }
 }
