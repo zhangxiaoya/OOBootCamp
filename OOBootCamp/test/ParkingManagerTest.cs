@@ -53,7 +53,19 @@ namespace OOBootCamp.test
         [Fact]
         public void should_ask_any_parking_boy_pick_one_car_successfully()
         {
-            
+            var parkingLotForParkingBoy = new ParkingLot(1);
+            var parkingLotForSmartParkingBoy = new ParkingLot(2);
+            var parkingLotForSuperParkingBoy = new ParkingLot(3);
+            var parkingBoy = new ParkingBoy(new[] {parkingLotForParkingBoy});
+            var smartParkingBoy = new SmartParkingBoy(new[] {parkingLotForSmartParkingBoy});
+            var superParkingBoy = new SuperParkingBoy(new[] {parkingLotForSuperParkingBoy});
+            var parkingManager = new ParkingManager(parkingBoy,smartParkingBoy,superParkingBoy);
+            var car = new Car();
+            var carToken = parkingLotForSmartParkingBoy.Park(car);
+
+            var pickedCar = parkingManager.Pick(carToken);
+
+            Assert.Same(car,pickedCar);
         }
 
         [Fact]
