@@ -6,11 +6,13 @@ namespace OOBootCamp.service
     {
         private readonly ParkingBoy parkingBoy;
         private readonly SmartParkingBoy smartParkingBoy;
+        private readonly SuperParkingBoy superParkingBoy;
 
-        public ParkingManager(ParkingBoy parkingBoy=null, SmartParkingBoy smartParkingBoy=null)
+        public ParkingManager(ParkingBoy parkingBoy = null, SmartParkingBoy smartParkingBoy = null, SuperParkingBoy superParkingBoy = null)
         {
             this.parkingBoy = parkingBoy;
             this.smartParkingBoy = smartParkingBoy;
+            this.superParkingBoy = superParkingBoy;
         }
 
         public int SimplePark(Car car)
@@ -21,6 +23,11 @@ namespace OOBootCamp.service
         public int SmartPark(Car car)
         {
             return smartParkingBoy.Park(car);
+        }
+
+        public int SuperPark(Car car)
+        {
+            return superParkingBoy.Park(car);
         }
     }
 }

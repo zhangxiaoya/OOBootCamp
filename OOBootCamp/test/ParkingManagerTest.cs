@@ -26,7 +26,7 @@ namespace OOBootCamp.test
             var parkingLotWithLessEmptyParkSpace = new ParkingLot(3);
             var parkingLotWithMoreEmptyParkSpace = new ParkingLot(5);
             var smartParkingBoy = new SmartParkingBoy(new[]{parkingLotWithLessEmptyParkSpace,parkingLotWithMoreEmptyParkSpace});
-            var parkingManager = new ParkingManager(smartParkingBoy:smartParkingBoy);
+            var parkingManager = new ParkingManager(smartParkingBoy: smartParkingBoy);
             var car = new Car();
 
             var carToken = parkingManager.SmartPark(car);
@@ -37,7 +37,17 @@ namespace OOBootCamp.test
         [Fact]
         public void should_ask_super_parking_boy_park_one_car_to_parking_lot_with_highest_vacancy_rate()
         {
-            
+            var parkingLotWithLowVacancyRate = new ParkingLot(3);
+            parkingLotWithLowVacancyRate.Park(new Car());
+            var parkingLotWithHighVacancyRate = new ParkingLot(5);
+            parkingLotWithHighVacancyRate.Park(new Car());
+            var superParkingBoy = new SuperParkingBoy(new[] {parkingLotWithLowVacancyRate, parkingLotWithHighVacancyRate});
+            var car = new Car();
+            var parkingManager = new ParkingManager(superParkingBoy:superParkingBoy);
+
+            var carToken = parkingManager.SuperPark(car);
+
+            Assert.Same(car, parkingLotWithHighVacancyRate.Pick(carToken));
         }
 
         [Fact]
