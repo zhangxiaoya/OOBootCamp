@@ -1,15 +1,14 @@
 ﻿using System.Linq;
-using OOBootCamp.Model;
 
 namespace OOBootCamp.service
 {
-    public class ParkingBoy : ParkingBoyBase{
-        public ParkingBoy(ParkingLot[] parkingLotList):base(parkingLotList)
+    public class ParkingBoy : ParkingBoyBase
+    {
+        public ParkingBoy(ParkingLot[] parkingLotList) : base(parkingLotList) {}
+
+        protected override ParkingLot GetParkingLot()
         {
-        }
-        public int Park(Car car)
-        {
-            return (from parkingLot in ParkingLotList where parkingLot.IsAvailable() select parkingLot.Park(car)).FirstOrDefault();
+            return ParkingLotList.FirstOrDefault(parkingLot => parkingLot.IsAvailable()) ?? ParkingLotList[0];
         }
     }
 }

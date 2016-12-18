@@ -9,7 +9,7 @@ namespace OOBootCamp.test
         [Fact]
         public void should_park_one_car()
         {
-            var parkingLot = new ParkingLot();
+            var parkingLot = new ParkingLot(4);
             var parkingBoy = new ParkingBoy(new[]{parkingLot});
             var car = new Car();
 
@@ -21,8 +21,8 @@ namespace OOBootCamp.test
         [Fact]
         public void should_park_one_car_to_first_avaliable_parking_lot()
         {
-            var parkingLotOne = new ParkingLot();
-            var parkingLotTwo = new ParkingLot();
+            var parkingLotOne = new ParkingLot(4);
+            var parkingLotTwo = new ParkingLot(4);
             var parkingBoy = new ParkingBoy(new[]{parkingLotOne,parkingLotTwo});
             TakeAllParkingSpaceOfParkingLot(parkingLotOne);
             var car = new Car();
@@ -35,8 +35,8 @@ namespace OOBootCamp.test
         [Fact]
         public void should_not_park_one_car_while_no_one_parking_lot_available()
         {
-            var parkingLotOne = new ParkingLot();
-            var parkingLotTwo = new ParkingLot();
+            var parkingLotOne = new ParkingLot(4);
+            var parkingLotTwo = new ParkingLot(4);
             var parkingBoy = new ParkingBoy(new[] { parkingLotOne, parkingLotTwo });
             TakeAllParkingSpaceOfParkingLot(parkingLotOne);
             TakeAllParkingSpaceOfParkingLot(parkingLotTwo);
@@ -51,7 +51,7 @@ namespace OOBootCamp.test
         [Fact]
         public void should_pick_one_car()
         {
-            var parkingLot = new ParkingLot();
+            var parkingLot = new ParkingLot(4);
             var parkingBoy = new ParkingBoy(new[] { parkingLot});
             var car = new Car();
 
@@ -64,8 +64,8 @@ namespace OOBootCamp.test
         [Fact]
         public void should_pick_one_car_when_have_two_parking_lots()
         {
-            var parkingLotOne = new ParkingLot();
-            var parkingLotTwo = new ParkingLot();
+            var parkingLotOne = new ParkingLot(4);
+            var parkingLotTwo = new ParkingLot(4);
             var parkingBoy = new ParkingBoy(new[] { parkingLotOne,parkingLotTwo });
             TakeAllParkingSpaceOfParkingLot(parkingLotOne);
             var car = new Car();
@@ -79,7 +79,7 @@ namespace OOBootCamp.test
         [Fact]
         public void should_not_pick_one_car_while_no_car_parking()
         {
-            var parkingLot = new ParkingLot();
+            var parkingLot = new ParkingLot(4);
             var parkingBoy = new ParkingBoy(new[] { parkingLot });
             const int illegalToken = 0;
 
