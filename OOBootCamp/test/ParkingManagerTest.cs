@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using OOBootCamp.Model;
+using OOBootCamp.service;
+using Xunit;
 
 namespace OOBootCamp.test
 {
@@ -7,7 +9,15 @@ namespace OOBootCamp.test
         [Fact]
         public void should_ask_parking_boy_park_one_car_to_first_available_parking_lot()
         {
-            
+            var parkingLotHasLessParkSpace = new ParkingLot(3);
+            var parkingLotHasMoreParkSpace = new ParkingLot(5);
+            var parkingBoy = new ParkingBoy(new[] {parkingLotHasMoreParkSpace, parkingLotHasLessParkSpace});
+            var parkingManager = new ParkingManager(parkingBoy);
+
+            var car = new Car();
+            var carToken = parkingManager.SimplePark(car);
+
+            Assert.Same(car,parkingLotHasMoreParkSpace.Pick(carToken));
         }
 
         [Fact]
@@ -50,6 +60,20 @@ namespace OOBootCamp.test
         public void should_pick_car_failed_by_himself()
         {
             
+        }
+    }
+
+    public class ParkingManager
+    {
+        private readonly ParkingBoy parkingBoy;
+        public ParkingManager(ParkingBoy parkingBoy)
+        {
+            this.parkingBoy = parkingBoy;
+        }
+
+        public int SimplePark(Car car)
+        {
+            return parkingBoy.Park(car);
         }
     }
 }

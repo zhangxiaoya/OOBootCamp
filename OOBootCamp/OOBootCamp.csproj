@@ -73,6 +73,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="test\ParkingLotTest.cs" />
     <Compile Include="service\SamrtParkingBoy.cs" />
+    <Compile Include="test\ParkingManagerTest.cs" />
     <Compile Include="test\SmartParkingBoyTest.cs" />
     <Compile Include="test\SuperParkingBoyTest.cs" />
   </ItemGroup>
